@@ -24,14 +24,9 @@ const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
     </Button>
   );
 
-  const handleDelete = async () => {
-    "use server";
-    await deleteTicket(ticket.id);
-  };
-
   const deleteButton = (
-    <form action={handleDelete}>
-      <Button variant="outline" size="icon">
+    <form action={deleteTicket.bind(null, ticket.id)}>
+      <Button variant="outline" size="icon" className="cursor-pointer">
         <LucideTrash className="h-4 w-4" />
       </Button>
     </form>

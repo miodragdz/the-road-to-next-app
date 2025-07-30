@@ -3,9 +3,10 @@
 
 import { getTickets } from "../queries/get-tickets";
 import { TicketItem } from "./ticket-item";
+import { Ticket } from ".prisma/generated/client";
 
 const TicketList = async () => {
-  const tickets = await getTickets();
+  const tickets = (await getTickets()) as Ticket[];
   // const [tickets, setTickets] = useState<Ticket[]>([]);
 
   // useEffect(() => {

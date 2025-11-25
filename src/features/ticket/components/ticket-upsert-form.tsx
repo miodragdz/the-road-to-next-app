@@ -1,8 +1,8 @@
 import { Label } from "@radix-ui/react-label";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { upsertTicket } from "../actions/upsert-ticket";
+import { SubmitButton } from "./form/submit-button";
 import { Ticket } from ".prisma/generated/client";
 
 type TicketUpsertFormProps = {
@@ -21,9 +21,7 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
       <Label htmlFor="content">Content</Label>
       <Textarea id="content" name="content" defaultValue={ticket?.content} />
 
-      <Button className="cursor-pointer" type="submit">
-        {ticket ? "Update" : "Create"}
-      </Button>
+      <SubmitButton label={ticket ? "Update" : "Create"} />
     </form>
   );
 };

@@ -2,10 +2,10 @@
 
 import { Label } from "@radix-ui/react-label";
 import { useActionState } from "react";
+import { SubmitButton } from "@/components/form/submit-button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { upsertTicket } from "../actions/upsert-ticket";
-import { SubmitButton } from "./form/submit-button";
 import { Ticket } from ".prisma/generated/client";
 
 type TicketUpsertFormProps = {

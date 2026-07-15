@@ -10,6 +10,7 @@ import { consumeCookiedByKey } from "@/actions/cookies";
 const RedirectToast = () => {
   // added because component RedirectToast is moved to layout and layout renders only once, so
   // pathname added to useEffect to make sure it runs every time path changes and check for cookie
+  //this should be not needed if RedirectToast is in template.tsx, but this is nextjs bug, still existing
   const pathname = usePathname();
 
   useEffect(() => {

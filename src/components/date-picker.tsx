@@ -35,7 +35,7 @@ const DatePicker = ({ id, name, defaultValue }: DatePickerProps) => {
       <PopoverTrigger id={id} className="w-full" asChild>
         <Button
           variant="outline"
-          className="justify-start text-left font-normal"
+          className="justify-start text-left font-normal cursor-pointer"
         >
           <LucideCalendar className="mr-2 h-4 w-4" />
           {formattedStringDate}

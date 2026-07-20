@@ -2,6 +2,7 @@
 
 import { LucideTrash } from "lucide-react";
 import { toast } from "sonner";
+import { useConfirmDialog } from "@/components/confirm-dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,6 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { deleteTicket } from "../actions/delete-ticket";
 import { updateTicketStatus } from "../actions/update-ticket-status";
 import { TICKET_STATUS_LABELS } from "../constants";
 import { Ticket, TicketStatus } from ".prisma/generated/client";
@@ -21,12 +23,15 @@ type TicketMoreMenuProps = {
 };
 
 const TicketMoreMenu = ({ ticket, trigger }: TicketMoreMenuProps) => {
-  const deleteButton = (
-    <DropdownMenuItem>
-      <LucideTrash className="h-4 w-4" />
-      <span>Delete</span>
-    </DropdownMenuItem>
-  );
+  const [deleteButton, deleteDialog] = useConfirmDialog({
+    action: deleteTicket.bind(null, ticket.id),
+    trigger: (
+      <DropdownMenuItem className="cursor-pointer">
+        <LucideTrash className="h-4 w-4" />
+        <span>Delete</span>
+      </DropdownMenuItem>
+    ),
+  });
 
   const handleUpdateTicketStatus = async (value: string) => {
     const promise = updateTicketStatus(ticket.id, value as TicketStatus);
@@ -50,7 +55,7 @@ const TicketMoreMenu = ({ ticket, trigger }: TicketMoreMenuProps) => {
       onValueChange={handleUpdateTicketStatus}
     >
       {(Object.keys(TICKET_STATUS_LABELS) as Array<TicketStatus>).map((key) => (
-        <DropdownMenuRadioItem key={key} value={key}>
+        <DropdownMenuRadioItem className="cursor-pointer" key={key} value={key}>
           {TICKET_STATUS_LABELS[key]}
         </DropdownMenuRadioItem>
       ))}
@@ -58,14 +63,18 @@ const TicketMoreMenu = ({ ticket, trigger }: TicketMoreMenuProps) => {
   );
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>{trigger}</DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" side="right">
-        {ticketStatusRadioGroupItems}
-        <DropdownMenuSeparator />
-        {deleteButton}
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <>
+      {deleteDialog}
+
+      <DropdownMenu modal={false}>
+        <DropdownMenuTrigger asChild>{trigger}</DropdownMenuTrigger>
+        <DropdownMenuContent className="w-56" side="right">
+          {ticketStatusRadioGroupItems}
+          <DropdownMenuSeparator />
+          {deleteButton}
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </>
   );
 };
 

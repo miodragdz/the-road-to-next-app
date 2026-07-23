@@ -15,7 +15,7 @@ const TicketsPage = () => {
       <CardCompact
         title="Create Ticket"
         description="A new ticket will be created"
-        className="w-full max-w-[420px] self-center"
+        className="w-full max-w-105 self-center"
         content={<TicketUpsertForm />}
       />
 

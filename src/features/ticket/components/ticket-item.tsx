@@ -16,17 +16,15 @@ import {
 import { ticketEditPath, ticketPath } from "@/paths";
 import { toCurrencyFromCent } from "@/utils/currency";
 import { TICKET_ICONS } from "../constants";
+import { TicketWithMetadata } from "../types";
 import { TicketMoreMenu } from "./ticket-more-menu";
-import { Ticket } from ".prisma/generated/client";
 
 type TicketItemProps = {
-  ticket: Ticket;
+  ticket: TicketWithMetadata;
   isDetail?: boolean;
 };
 
 const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
-  console.log("Where am I displayed? (TicketItem)");
-
   const detailButton = (
     <Button variant="outline" size="icon" asChild>
       <Link prefetch href={ticketPath(ticket.id)}>
@@ -80,7 +78,9 @@ const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
           </span>
         </CardContent>
         <CardFooter className="flex justify-between">
-          <p className="text-sm text-muted-foreground">{ticket.deadline}</p>
+          <p className="text-sm text-muted-foreground">
+            {ticket.deadline} by {ticket.user.username}
+          </p>
           <p className="text-sm text-muted-foreground">
             {toCurrencyFromCent(ticket.bounty)}
           </p>

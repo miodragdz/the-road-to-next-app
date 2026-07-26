@@ -1,8 +1,9 @@
-export type TicketStatus = "OPEN" | "IN_PROGRESS" | "DONE";
+import { Prisma } from ".prisma/generated/client";
 
-export type Ticket = {
-  id: string;
-  title: string;
-  content: string;
-  status: TicketStatus;
-};
+export type TicketWithMetadata = Prisma.TicketGetPayload<{
+  include: {
+    user: {
+      select: { username: true };
+    };
+  };
+}>;

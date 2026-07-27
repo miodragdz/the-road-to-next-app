@@ -6,7 +6,7 @@ import { ticketsPath } from "@/paths";
 export default function NotFound() {
   return (
     <Placeholder
-      label="Ticket not found"
+      label="We could not found your ticket"
       button={
         <Button asChild variant="outline">
           <Link href={ticketsPath()}>Go to Tickets</Link>

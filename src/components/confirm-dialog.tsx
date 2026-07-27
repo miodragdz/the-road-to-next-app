@@ -38,6 +38,10 @@ const useConfirmDialog = ({
     setIsOpen(false);
   };
 
+  const handleError = () => {
+    setIsOpen(false);
+  };
+
   const dialog = (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
       <AlertDialogContent>
@@ -54,6 +58,7 @@ const useConfirmDialog = ({
               action={formAction}
               actionState={actionState}
               onSuccess={handleSuccess}
+              onError={handleError}
             >
               <SubmitButton label="Confirm" />
             </Form>

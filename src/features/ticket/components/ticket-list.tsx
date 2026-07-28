@@ -1,22 +1,12 @@
-// commented code is for fatching data on client side
-// "use client";
-
 import { getTickets } from "../queries/get-tickets";
 import { TicketItem } from "./ticket-item";
 
-const TicketList = async () => {
-  const tickets = await getTickets();
-  // const [tickets, setTickets] = useState<Ticket[]>([]);
+type TicketListProps = {
+  userId?: string;
+};
 
-  // useEffect(() => {
-  //   const fetchTickets = async () => {
-  //     const result = await getTickets();
-
-  //     setTickets(result);
-  //   };
-
-  //   fetchTickets();
-  // }, []);
+const TicketList = async ({ userId }: TicketListProps) => {
+  const tickets = await getTickets(userId);
 
   return (
     <div className="flex-1 flex flex-col items-center gap-y-4 animate-fade-from-top">

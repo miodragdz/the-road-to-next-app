@@ -12,7 +12,7 @@ const TicketsPage = async () => {
   const { user } = await getAuth();
 
   return (
-    <div className="flex-1 flex flex-col gap-y-8">
+    <div className="flex-1 flex flex-col gap-y-8 pl-8">
       <Heading title="My Tickets" description="All your tickets at one place" />
 
       <CardCompact

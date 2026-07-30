@@ -17,6 +17,7 @@ type SubmitButtonProps = {
     | "ghost"
     | "link";
   size?: "default" | "sm" | "lg" | "icon";
+  className?: string;
 };
 
 const SubmitButton = ({
@@ -24,13 +25,14 @@ const SubmitButton = ({
   icon,
   variant = "default",
   size = "default",
+  className = "",
 }: SubmitButtonProps) => {
   const { pending } = useFormStatus();
 
   return (
     <Button
       disabled={pending}
-      className="cursor-pointer"
+      className={`cursor-pointer ${className}`}
       type="submit"
       variant={variant}
       size={size}

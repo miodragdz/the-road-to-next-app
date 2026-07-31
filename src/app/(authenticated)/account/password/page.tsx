@@ -1,8 +1,8 @@
 import { CardCompact } from "@/components/card-compact";
 import { Heading } from "@/components/heading";
-import { AccountTabs } from "@/features/account/components/account-tabs";
 import { UpdatePasswordForm } from "@/features/account/components/update-password-form";
 import { getAuthOrRedirect } from "@/features/auth/queries/get-auth-or-redirect";
+import { AccountTabs } from "../_navigation/tabs";
 
 const PasswordPage = async () => {
   const { user: authUser } = await getAuthOrRedirect();

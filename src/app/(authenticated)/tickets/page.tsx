@@ -16,10 +16,6 @@ type TicketsPageProps = {
 
 const TicketsPage = async ({ searchParams }: TicketsPageProps) => {
   const { user } = await getAuth();
-  const konj = await searchParams;
-  console.log("🚀 ~ TicketsPage ~ konj:", konj);
-  const dsfhgkas = searchParamsCache.parse(await searchParams);
-  console.log("🚀 ~ TicketsPage ~ dsfhgkas:", dsfhgkas);
 
   return (
     <div className="flex-1 flex flex-col gap-y-8 pl-8">

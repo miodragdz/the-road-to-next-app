@@ -39,13 +39,20 @@ const tickets = [
   },
 ];
 
+const comments = [
+  { content: "First comment from DB." },
+  { content: "Second comment from DB." },
+  { content: "Third comment from DB." },
+];
+
 const seed = async () => {
   const t0 = performance.now();
   console.log("DB Seed: Started ...");
   console.time("DB Seed: Duration time");
 
+  await prisma.comment.deleteMany();
+  await prisma.ticket.deleteMany();
   await prisma.user.deleteMany();
-  await prisma.ticket.deleteMany(); // Clear existing tickets
 
   const passwordHash = await hash("geheimnis");
 
@@ -56,30 +63,24 @@ const seed = async () => {
     })),
   });
 
-  await prisma.ticket.createMany({
+  const dbTickets = await prisma.ticket.createManyAndReturn({
     data: tickets.map((ticket) => ({
       ...ticket,
       userId: dbUsers[0].id,
     })),
   });
 
+  await prisma.comment.createMany({
+    data: comments.map((comment) => ({
+      ...comment,
+      ticketId: dbTickets[0].id,
+      userId: dbUsers[1].id,
+    })),
+  });
+
   const t1 = performance.now();
   console.log(`DB Seed: Finished (${t1 - t0}ms)`);
   console.timeEnd("DB Seed: Duration time");
-
-  // alternative ways:
-  //   const promises = tickets.map((ticket) =>
-  //     prisma.ticket.create({
-  //       data: ticket,
-  //     })
-  //   );
-  //   await Promise.all(promises);
-
-  //   for (const ticket of tickets) {
-  //     await prisma.ticket.create({
-  //       data: ticket,
-  //     });
-  //   }
 };
 
 seed();

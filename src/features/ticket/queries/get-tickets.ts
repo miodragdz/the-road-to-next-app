@@ -27,6 +27,8 @@ export const getTickets = async (
         user: {
           select: {
             username: true,
+            firstName: true,
+            lastName: true,
           },
         },
       },

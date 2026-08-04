@@ -10,7 +10,7 @@ const CommentItem = ({ comment, buttons }: CommentItemProps) => {
   const user = comment.user;
 
   return (
-    <div className="flex gap-x-2">
+    <div className="flex gap-2">
       <Card className="p-4 flex-1 flex flex-col gap-y-1">
         <div className="flex justify-between">
           <p className="text-sm text-muted-foreground">
@@ -23,7 +23,9 @@ const CommentItem = ({ comment, buttons }: CommentItemProps) => {
         <p className="whitespace-pre-line">{comment.content}</p>
       </Card>
 
-      <div className="flex flex-col gap-y-1">{buttons}</div>
+      {buttons.length ? (
+        <div className="flex flex-col gap-y-1">{buttons}</div>
+      ) : null}
     </div>
   );
 };

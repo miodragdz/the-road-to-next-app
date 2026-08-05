@@ -6,7 +6,7 @@ import { getAuth } from "@/features/auth/queries/get-auth";
 import { isOwner } from "@/features/auth/utils/is-owner";
 import { TicketUpsertForm } from "@/features/ticket/components/ticket-upsert-form";
 import { getTicket } from "@/features/ticket/queries/get-ticket";
-import { homePath, ticketPath } from "@/paths";
+import { ticketPath, ticketsPath } from "@/paths";
 
 type TicketEditPageProps = {
   params: Promise<{
@@ -30,7 +30,7 @@ const TicketEditPage = async ({ params }: TicketEditPageProps) => {
     <div className="flex-1 flex flex-col gap-y-8 pl-8">
       <Breadcrumbs
         breadcrumbs={[
-          { title: "Tickets", href: homePath() },
+          { title: "Tickets", href: ticketsPath() },
           { title: ticket.title, href: ticketPath(ticket.id) },
           { title: "Edit" },
         ]}

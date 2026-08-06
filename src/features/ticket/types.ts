@@ -6,4 +6,4 @@ export type TicketWithMetadata = Prisma.TicketGetPayload<{
       select: { username: true; firstName: true; lastName: true };
     };
   };
-}>;
+}> & { isOwner: boolean };
